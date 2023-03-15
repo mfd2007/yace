@@ -21,7 +21,7 @@ export default {
         }
       },
       product_tree:[
-        {branches:[{category:"product_family", name:"controller", branches: [{category:"product_version", name:"1.0", full_product_names:{name:"controller 1.0",product_id:"1"}}]}]}
+        {branches:[{category:"product_family", name:"controller", branches: [{category:"product_version", name:"1.0", product:{name:"controller 1.0",product_id:"1"}}]}]}
       ]
     }
 };

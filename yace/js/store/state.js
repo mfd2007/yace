@@ -1,7 +1,7 @@
 export default {
     csaf: {
       document:{
-        title:"Test title",
+        title:"sdklfjsdflkj title",
         csaf_version:"2.0",
         category: "csaf_security_advisory",
         "publisher": {

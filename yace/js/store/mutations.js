@@ -29,7 +29,7 @@ export default {
       return state;
   },
   addProduct(state, payload) {
-    let prod = proddb.getProductDetail(payload);
+    let prod = payload;
     if (state.csaf.product_tree == null){
       state.csaf.product_tree =  [prod];
     } else {

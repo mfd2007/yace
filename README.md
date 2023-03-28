@@ -5,12 +5,17 @@ A simple editor to create CSAF files.
 
 ## Product database
 
-The selectable products are hardcoded at the moment in the file `yace/js/lib/productdatabase.js`.
+The selectable products are placed in folder data. 
+
+- `product-list.json` contains a list of all products with name and id. `name` is displayed in the drop down field. `id` is used as part of filename to download product details.
+- `/data/` contains files with product details.
 
 ## ToDo
 
-- Loading of product database from json file.
 - Find full product name & id dynamically in product database.
+- Load files from URL or drag'n'drop.
+- Add missing field for vulnerabilities
+- Send csaf document to validation server
 
 
 ## Security consideration

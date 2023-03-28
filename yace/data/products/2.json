@@ -1,0 +1,18 @@
+{
+	"branches": [
+		{
+			"category": "product_family",
+			"name": "controller",
+			"branches": [
+				{
+					"category": "product_version",
+					"name": "2.0",
+					"product": {
+						"name": "controller 2.0",
+						"product_id": "2"
+					}
+				}
+			]
+		}
+	]
+}

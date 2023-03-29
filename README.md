@@ -15,6 +15,10 @@ The selectable products are placed in folder data.
 - Find full product name & id dynamically in product database.
 - Load files from URL or drag'n'drop.
 - Send csaf document to validation server
+- product-id bei Affected, fixed in Arrays und konsolidieren, bei mehreren produkten
+- Tabs für Übersichtlichkeit
+- Hübsch machen
+- Progessbar.
 
 
 ## Security consideration

@@ -86,12 +86,27 @@ export default {
     if (state.csaf.document.notes == null){
       state.csaf.document.notes =  [{}];
     } else {
-      state.csaf.document.notest.push({});
+      state.csaf.document.notes.push({});
     }
     return state;
   },
   removeNotes(state, payload) {
     state.csaf.document.notes.splice(payload.index, 1);
+    return state;
+  }
+  
+  ,
+  
+  addVulNotes(state, payload) {
+    if (state.csaf.vulnerabilities[payload.vulId].notes == null){
+      state.csaf.vulnerabilities[payload.vulId].notes =  [{}];
+    } else {
+      state.csaf.vulnerabilities[payload.vulId].notes.push({});
+    }
+    return state;
+  },
+  removeVulNotes(state, payload) {
+    state.csaf.vulnerabilities[payload.vulId].notes.splice(payload.index, 1);
     return state;
   }
 };

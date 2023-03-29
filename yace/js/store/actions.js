@@ -39,5 +39,11 @@ export default {
     },
     removeNotes(context, payload) {
       context.commit('removeNotes', payload);
+    },
+    addVulNotes(context, payload) {
+      context.commit('addVulNotes', payload);
+    },
+    removeVulNotes(context, payload) {
+      context.commit('removeVulNotes', payload);
     }
 };

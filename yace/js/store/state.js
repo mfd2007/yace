@@ -1,21 +1,21 @@
 export default {
     csaf: {
       document:{
-        title:"sdklfjsdflkj title",
+        title:"CSAF test advisory",
         csaf_version:"2.0",
         category: "csaf_security_advisory",
         "publisher": {
           "category": "coordinator",
-          "name": "bsi",
-          "namespace": "hh:jjj",
-          "contact_details": "dd@ddd"
+          "name": "ACME Cooperation",
+          "namespace": "https://acme.example",
+          "contact_details": "csaf@acme.example"
         },
         tracking:{
           "revision_history": [
             {
               "number": "1.0.0",
-              "date": "2023-03-15T01:01",
-              "summary": "12122"
+              "date": "2023-03-15T00:00:00Z",
+              "summary": "Initial version"
             }
           ]
         }

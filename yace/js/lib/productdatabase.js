@@ -18,8 +18,8 @@
     }
   ];
   }
-  const API_URL_LIST = '/data/product-list.json';
-  const API_URL_PRODUCT = '/data/products/';
+  const API_URL_LIST = './data/product-list.json';
+  const API_URL_PRODUCT = './data/products/';
   
   async function fetchProductList() {
     try{

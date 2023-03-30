@@ -42,7 +42,7 @@ export default class RevisionList extends Component {
                             <label for="document.tracking.revision_history.${index}.number">Version</label>
                             <input id="document.tracking.revision_history.${index}.number" type="text" value="${(revisionItem.number != undefined) ? revisionItem.number:''}" />
                             <label for="document.tracking.revision_history.${index}.date">Date</label>
-                            <input id="document.tracking.revision_history.${index}.date" type="datetime-local" value="${(revisionItem.date != undefined) ? revisionItem.date:''}" />
+                            <input id="document.tracking.revision_history.${index}.date" type="datetime-local" value="${(revisionItem.date != undefined) ? this.toDatetimeLocal(revisionItem.date):''}" />
                             <label for="document.tracking.revision_history.${index}.summary">summary</label>
                             <input id="document.tracking.revision_history.${index}.summary" type="text" value="${(revisionItem.summary != undefined) ? revisionItem.summary:''}" />
                             <button id="remove_revision" class="w3-button w3-transparent w3-display-right" aria-label="Delete this item">&times</button>
@@ -79,9 +79,27 @@ export default class RevisionList extends Component {
         
         self.element.querySelectorAll("input[type=\"datetime-local\"]").forEach((element) => {
             element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
+                store.dispatch('setItem', { path: element.id, value: new Date(element.value).toISOString()});
             });
         });
 
     }
+    
+    toDatetimeLocal(dt) {
+    var
+      date = new Date(dt),
+      ten = function (i) {
+        return (i < 10 ? '0' : '') + i;
+      },
+      YYYY = date.getFullYear(),
+      MM = ten(date.getMonth() + 1),
+      DD = ten(date.getDate()),
+      HH = ten(date.getHours()),
+      II = ten(date.getMinutes()),
+      SS = ten(date.getSeconds())
+    ;
+    return YYYY + '-' + MM + '-' + DD + 'T' +
+             HH + ':' + II + ':' + SS;
+  };
+
 };

@@ -15,6 +15,8 @@ The selectable products are placed in folder data.
 - Find full product name & id dynamically in product database.
 - Load files from URL or drag'n'drop.
 - Send csaf document to validation server
+- Hübsch machen
+- Progessbar.
 
 
 ## Security consideration

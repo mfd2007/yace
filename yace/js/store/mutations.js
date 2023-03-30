@@ -108,5 +108,19 @@ export default {
   removeVulNotes(state, payload) {
     state.csaf.vulnerabilities[payload.vulId].notes.splice(payload.index, 1);
     return state;
+  },
+  setProductStatus(state, payload){
+    let vulStatus=state.csaf.vulnerabilities[payload.vulnerabilityId].product_status;
+    if(vulStatus === undefined){
+      state.csaf.vulnerabilities[payload.vulnerabilityId].product_status = {};
+      vulStatus=state.csaf.vulnerabilities[payload.vulnerabilityId].product_status;
+    }
+    if(vulStatus[payload.status] === undefined){
+      vulStatus[payload.status] = [];
+    }
+    Object.keys(vulStatus).forEach((status) =>{
+      vulStatus[status].filter((productId => productId !== payload.productId));
+    });
+    vulStatus[payload.status].push(payload.productId);
   }
 };

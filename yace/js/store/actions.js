@@ -45,5 +45,8 @@ export default {
     },
     removeVulNotes(context, payload) {
       context.commit('removeVulNotes', payload);
+    },
+    setProductStatus(context, payload) {
+      context.commit('setProductStatus', payload);
     }
 };

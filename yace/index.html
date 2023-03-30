@@ -2,26 +2,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="./css/w3.css"> 
+ <link rel="stylesheet" href="./css/w3.css">
+   <script type="text/javascript" src="js/lib/ui.js"></script> 
 </head>
 <body>
+	 <div class="w3-bar w3-black">
+	  <button class="w3-bar-item w3-button" onclick="openTab('tab-general')">General</button>
+	  <button class="w3-bar-item w3-button" onclick="openTab('tab-information')">Futher Information</button>
+	  <button class="w3-bar-item w3-button" onclick="openTab('tab-products')">Products</button>
+	  <button class="w3-bar-item w3-button" onclick="openTab('tab-vulnerability')">Vulnerability</button>
+	</div> 
+
   <div class="w3-container">
-    <h2>General informations</h2>
-    <div id="title"></div>
-    <div id="tracking-id"></div>
-    <div id="tlp"></div>
-    <div id="document_status"></div>
-    
-    <div id="revisionList"></div>
-    <div id="referencesList"></div>
-    <div id="notesList"></div>
-        
-    <div id="productList"></div>
-    <div id="vulnerablityList"></div>
-    
+    <div id="tab-general" class="tab">
+	    <h2>General informations</h2>
+	    <div id="title"></div>
+	    <div id="tracking-id"></div>
+	    <div id="tlp"></div>
+	    <div id="document_status"></div>
+	    <div id="revisionList"></div>
+    </div>
+	    <div id="tab-information" class="tab" style="display:none">
+	    <div id="referencesList"></div>
+	    <div id="notesList"></div>
+    </div>
+    <div id=tab-products class="tab" style="display:none">
+      <div id="productList"></div>
+    </div>
+    <div id=tab-vulnerability class="tab" style="display:none">
+      <div id="vulnerablityList"></div>
+    </div>
     <button class="w3-button w3-blue" id="btn_export">Export</button>
   </div>
-  
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

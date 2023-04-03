@@ -24,8 +24,8 @@ export default class RevisionList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.tracking?.revision_history == undefined) {
           self.element.innerHTML = `
+            <h2>Revision</h2>
             <ul class="w3-ul">
-              <li><h2>Revision</h2></li>
               <li>
                 <button id="add_revision" class="w3-button w3-block w3-green">Add</button>
               </li>
@@ -34,22 +34,24 @@ export default class RevisionList extends Component {
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <ul class="w3-ul">
-              <li><h2>Revision</h2></li>
-                ${store.state.csaf.document.tracking.revision_history.map((revisionItem, index) => {
-                    return `
-                        <li class="w3-display-container">
-                          <div id="input_document.tracking.revision_history.${index}.number"></div>
-                          <div id="input_document.tracking.revision_history.${index}.summary"></div>
-                          <div id="input_document.tracking.revision_history.${index}.date"></div> 
-                          <button id="remove_revision" class="w3-button w3-transparent w3-display-right" aria-label="Delete this item">&times</button>
-                        </li>
-                    `
-                }).join('')}
-                <li>
-                  <button id="add_revision" class="w3-button w3-block w3-green">Add Revsion</button>
-                </li>
-            </ul>
+            <h2>Revision</h2>
+            ${store.state.csaf.document.tracking.revision_history.map((revisionItem, index) => {
+              return `
+                <div class="w3-panel w3-leftbar">
+                  <div class="w3-row">
+                    <div class="w3-col w3-right" style="width:50px">
+                      <button id="remove_revision" class="w3-button w3-pale-red" aria-label="Delete this item">&times</button>
+                    </div>
+                    <div class="w3-rest w3-container">
+                      <div id="input_document.tracking.revision_history.${index}.number"></div>
+                      <div id="input_document.tracking.revision_history.${index}.summary"></div>
+                      <div id="input_document.tracking.revision_history.${index}.date"></div>
+                    </div>
+                  </div>
+                </div>
+              `
+              }).join('')}
+            <button id="add_revision" class="w3-button w3-block w3-green">Add Revsion</button>
           `;
           store.state.csaf.document.tracking.revision_history.forEach((item, index) => {
             let version = new TextInput("#input_document\\.tracking\\.revision_history\\." + index + "\\.number", "Version", "document.tracking.revision_history." + index + ".number", true, "");

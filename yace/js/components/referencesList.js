@@ -24,35 +24,30 @@ export default class ReferencesList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.references == undefined) {
           self.element.innerHTML = `
-            <ul class="w3-ul">
-              <li><h2>References</h2></li>
-              <li>
-                <button id="add_reference" class="w3-button w3-block w3-green">Add reference</button>
-              </li>
-            </ul>
+            <h2>References</h2>
+            <button id="add_reference" class="w3-button w3-block w3-green">Add reference</button>
          `;
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <ul class="w3-ul">
-              <li><h2>Revision</h2></li>
-                ${store.state.csaf?.document?.references.map((item, index) => {
-                    return `
-                        <li class="w3-container">
-                          <div class="w3-row">
-                            <div id="input_document.references.${index}.summary"></div>
-                            <div id="input_document.references.${index}.url"></div>
-                            <div id="input_document.references.${index}.category"></div>
-                            <button id="remove_reference" class="w3-button w3-transparent" aria-label="Delete this item">&times</button>
-                            </div>
-                          </div>
-                        </li>
-                    `
-                }).join('')}
-                <li>
-                  <button id="add_reference" class="w3-button w3-block w3-green">Add Revsion</button>
-                </li>
-            </ul>
+            <h2>Revision</h2>
+            ${store.state.csaf?.document?.references.map((item, index) => {
+              return `
+                <div class="w3-panel w3-leftbar">
+                  <div class="w3-row">
+                    <div class="w3-col w3-right" style="width:50px">
+                      <button id="remove_reference" class="w3-button w3-pale-red" aria-label="Delete this item">&times</button>
+                    </div>
+                    <div class="w3-rest w3-container">
+                      <div id="input_document.references.${index}.summary"></div>
+                      <div id="input_document.references.${index}.url"></div>
+                      <div id="input_document.references.${index}.category"></div>
+                    </div>
+                  </div>
+                </div>
+              `
+            }).join('')}
+            <button id="add_reference" class="w3-button w3-block w3-green">Add Revsion</button>
           `;
           store.state.csaf?.document?.references.forEach((item, index) => {
             let refSummary = new TextInput("#input_document\\.references\\." + index + "\\.summary", "Summary", "document.references." + index + ".summary", true, "");

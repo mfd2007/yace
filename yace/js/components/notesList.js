@@ -24,35 +24,30 @@ export default class NotesList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.notes == undefined) {
           self.element.innerHTML = `
-            <ul class="w3-ul">
-              <li><h2>Notes</h2></li>
-              <li>
-                <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
-              </li>
-            </ul>
+            <h2>Notes</h2>
+            <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
          `;
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <ul class="w3-ul">
-              <li><h2>Notes</h2></li>
-                ${store.state.csaf?.document?.notes.map((notesItem, index) => {
-                    return `
-                        <li class="w3-container">
-                          <div class="w3-row">
-                            <div id="input_document.notes.${index}.title"></div>
-                            <div id="input_document.notes.${index}.text"></div>
-                            <div id="input_document.notes.${index}.category"></div>
-                            <button id="remove_notes" class="w3-button w3-transparent" aria-label="Delete this item">&times</button>
-                            </div>
-                          </div>
-                        </li>
-                    `
-                }).join('')}
-                <li>
-                  <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
-                </li>
-            </ul>
+            <h2>Notes</h2>
+            ${store.state.csaf?.document?.notes.map((notesItem, index) => {
+              return `
+                <div class="w3-panel w3-leftbar">
+                  <div class="w3-row">
+                    <div class="w3-col w3-right" style="width:50px">
+                      <button id="remove_notes" class="w3-button  w3-pale-red" aria-label="Delete this item">&times</button>
+                    </div>
+                    <div class="w3-rest w3-container">
+                      <div id="input_document.notes.${index}.title"></div>
+                      <div id="input_document.notes.${index}.text"></div>
+                      <div id="input_document.notes.${index}.category"></div>
+                    </div>
+                  </div>
+                </div>
+              `
+            }).join('')}
+            <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
           `;
           store.state.csaf?.document?.notes.forEach((notesItem, index) => {
             let noteTitle = new TextInput("#input_document\\.notes\\." + index + "\\.title", "Title", "document.notes." + index + ".title", true, "");

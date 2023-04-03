@@ -1,6 +1,7 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
-import * as proddb from '../lib/productdatabase.js';
+import TextInput from './textinput.js';
+import DateInput from './dateinput.js';
 
 export default class RevisionList extends Component {
     
@@ -38,15 +39,10 @@ export default class RevisionList extends Component {
                 ${store.state.csaf.document.tracking.revision_history.map((revisionItem, index) => {
                     return `
                         <li class="w3-display-container">
-                          <div>
-                            <label for="document.tracking.revision_history.${index}.number">Version</label>
-                            <input id="document.tracking.revision_history.${index}.number" type="text" value="${(revisionItem.number != undefined) ? revisionItem.number:''}" />
-                            <label for="document.tracking.revision_history.${index}.date">Date</label>
-                            <input id="document.tracking.revision_history.${index}.date" type="datetime-local" value="${(revisionItem.date != undefined) ? this.toDatetimeLocal(revisionItem.date):''}" />
-                            <label for="document.tracking.revision_history.${index}.summary">summary</label>
-                            <input id="document.tracking.revision_history.${index}.summary" type="text" value="${(revisionItem.summary != undefined) ? revisionItem.summary:''}" />
-                            <button id="remove_revision" class="w3-button w3-transparent w3-display-right" aria-label="Delete this item">&times</button>
-                          </div>
+                          <div id="input_document.tracking.revision_history.${index}.number"></div>
+                          <div id="input_document.tracking.revision_history.${index}.summary"></div>
+                          <div id="input_document.tracking.revision_history.${index}.date"></div> 
+                          <button id="remove_revision" class="w3-button w3-transparent w3-display-right" aria-label="Delete this item">&times</button>
                         </li>
                     `
                 }).join('')}
@@ -54,7 +50,15 @@ export default class RevisionList extends Component {
                   <button id="add_revision" class="w3-button w3-block w3-green">Add Revsion</button>
                 </li>
             </ul>
-        `;
+          `;
+          store.state.csaf.document.tracking.revision_history.forEach((item, index) => {
+            let version = new TextInput("#input_document\\.tracking\\.revision_history\\." + index + "\\.number", "Version", "document.tracking.revision_history." + index + ".number", true, "");
+            version.render();
+            let summary = new TextInput("#input_document\\.tracking\\.revision_history\\." + index + "\\.summary", "Version", "document.tracking.revision_history." + index + ".summary", true, "");
+            summary.render();
+            let datefield =  new DateInput("#input_document\\.tracking\\.revision_history\\." + index + "\\.date", "Date", "document.tracking.revision_history." + index + ".date", true);
+            datefield.render();
+          });
         }
         // Add a submit event listener to the form and prevent it from posting back
         self.element.querySelectorAll('#add_revision').forEach((button) => {
@@ -70,36 +74,5 @@ export default class RevisionList extends Component {
                 store.dispatch('removeRevision', { index });
             });
         });
-        
-        self.element.querySelectorAll("input[type=\"text\"]").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
-            });
-        });
-        
-        self.element.querySelectorAll("input[type=\"datetime-local\"]").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: new Date(element.value).toISOString()});
-            });
-        });
-
     }
-    
-    toDatetimeLocal(dt) {
-    var
-      date = new Date(dt),
-      ten = function (i) {
-        return (i < 10 ? '0' : '') + i;
-      },
-      YYYY = date.getFullYear(),
-      MM = ten(date.getMonth() + 1),
-      DD = ten(date.getDate()),
-      HH = ten(date.getHours()),
-      II = ten(date.getMinutes()),
-      SS = ten(date.getSeconds())
-    ;
-    return YYYY + '-' + MM + '-' + DD + 'T' +
-             HH + ':' + II + ':' + SS;
-  };
-
 };

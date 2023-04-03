@@ -1,6 +1,7 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
-import * as proddb from '../lib/productdatabase.js';
+import TextInput from './textinput.js';
+import ComboInput from './comboinput.js';
 
 export default class ReferencesList extends Component {
     
@@ -35,20 +36,13 @@ export default class ReferencesList extends Component {
           self.element.innerHTML = `
             <ul class="w3-ul">
               <li><h2>Revision</h2></li>
-                ${store.state.csaf?.document?.references.map((referenceItem, index) => {
+                ${store.state.csaf?.document?.references.map((item, index) => {
                     return `
                         <li class="w3-container">
                           <div class="w3-row">
-                            <label for="document.references.${index}.summary">summary</label>
-                            <input class="w3-input" id="document.references.${index}.summary" type="text" value="${(referenceItem.summary != undefined) ? referenceItem.summary:''}" />
-                            <label for="document.references.${index}.url">URL</label>
-                            <input class="w3-input" id="document.references.${index}.url" type="text" value="${(referenceItem.url != undefined) ? referenceItem.url:''}" />
-                            <label for="document.references.${index}.category">category</label>
-                            <select id="document.references.${index}.category" class="w3-select">
-                              <option value="">Choose your option</option>
-                              <option value="self" ${(referenceItem?.category != undefined && referenceItem?.category == "self")?'selected':''}>self</option>
-                              <option value="external" ${(referenceItem?.category != undefined && referenceItem?.category == "external")?'selected':''}>external</option>
-                            </select> 
+                            <div id="input_document.references.${index}.summary"></div>
+                            <div id="input_document.references.${index}.url"></div>
+                            <div id="input_document.references.${index}.category"></div>
                             <button id="remove_reference" class="w3-button w3-transparent" aria-label="Delete this item">&times</button>
                             </div>
                           </div>
@@ -59,7 +53,22 @@ export default class ReferencesList extends Component {
                   <button id="add_reference" class="w3-button w3-block w3-green">Add Revsion</button>
                 </li>
             </ul>
-        `;
+          `;
+          store.state.csaf?.document?.references.forEach((item, index) => {
+            let refSummary = new TextInput("#input_document\\.references\\." + index + "\\.summary", "Summary", "document.references." + index + ".summary", true, "");
+            refSummary.render();
+            let refUrl = new TextInput("#input_document\\.references\\." + index + "\\.url", "URL", "document.references." + index + ".url", true, "");
+            refUrl.render();
+            let noteCombo = new ComboInput(
+              "#input_document\\.references\\." + index + "\\.category", 
+              "Category", 
+              "document.references." + index + ".category", 
+              [
+                {value:"self", label:"self"},
+                {value:"external", label:"external"}],
+              true);
+            noteCombo.render();
+          });
         }
         // Add a submit event listener to the form and prevent it from posting back
         self.element.querySelectorAll('#add_reference').forEach((button) => {
@@ -75,18 +84,5 @@ export default class ReferencesList extends Component {
                 store.dispatch('removeReference', { index });
             });
         });
-        
-        self.element.querySelectorAll("input[type=\"text\"]").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
-            });
-        });
-        
-        self.element.querySelectorAll("select").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
-            });
-        });
-
     }
 };

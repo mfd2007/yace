@@ -1,6 +1,7 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
-import * as proddb from '../lib/productdatabase.js';
+import TextInput from './textinput.js';
+import ComboInput from './comboinput.js';
 
 export default class NotesList extends Component {
     
@@ -39,21 +40,9 @@ export default class NotesList extends Component {
                     return `
                         <li class="w3-container">
                           <div class="w3-row">
-                            <label for="document.notes.${index}.title">title</label>
-                            <input class="w3-input" id="document.notes.${index}.title" type="text" value="${(notesItem.title != undefined) ? notesItem.title:''}" />
-                            <label for="document.notes.${index}.text">URL</label>
-                            <input class="w3-input" id="document.notes.${index}.text" type="text" value="${(notesItem.text != undefined) ? notesItem.text:''}" />
-                            <label for="document.notes.${index}.category">category</label>
-                            <select id="document.notes.${index}.category" class="w3-select">
-                              <option value="">Choose your option</option>
-                              <option value="description" ${(notesItem?.category != undefined && notesItem?.category == "description")?'selected':''}>description</option>
-                              <option value="details" ${(notesItem?.category != undefined && notesItem?.category == "details")?'selected':''}>details</option>
-                              <option value="faq" ${(notesItem?.category != undefined && notesItem?.category == "faq")?'selected':''}>faq</option>
-                              <option value="general" ${(notesItem?.category != undefined && notesItem?.category == "general")?'selected':''}>general</option>
-                              <option value="legal_disclaimer" ${(notesItem?.category != undefined && notesItem?.category == "legal_disclaimer")?'selected':''}>legal_disclaimer</option>
-                              <option value="other" ${(notesItem?.category != undefined && notesItem?.category == "other")?'selected':''}>other</option>
-                              <option value="summary" ${(notesItem?.category != undefined && notesItem?.category == "summary")?'selected':''}>summary</option>
-                            </select> 
+                            <div id="input_document.notes.${index}.title"></div>
+                            <div id="input_document.notes.${index}.text"></div>
+                            <div id="input_document.notes.${index}.category"></div>
                             <button id="remove_notes" class="w3-button w3-transparent" aria-label="Delete this item">&times</button>
                             </div>
                           </div>
@@ -64,7 +53,27 @@ export default class NotesList extends Component {
                   <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
                 </li>
             </ul>
-        `;
+          `;
+          store.state.csaf?.document?.notes.forEach((notesItem, index) => {
+            let noteTitle = new TextInput("#input_document\\.notes\\." + index + "\\.title", "Title", "document.notes." + index + ".title", true, "");
+            noteTitle.render();
+            let noteText = new TextInput("#input_document\\.notes\\." + index + "\\.text", "Text", "document.notes." + index + ".text", true, "");
+            noteText.render();
+            let noteCombo = new ComboInput(
+              "#input_document\\.notes\\." + index + "\\.category", 
+              "Category", 
+              "document.notes." + index + ".category", 
+              [
+                {value:"description", label:"description"},
+                {value:"details", label:"details"},
+                {value:"faq", label:"faq"},
+                {value:"general", label:"general"},
+                {value:"legal_disclaimer", label:"legal_disclaimer"},
+                {value:"other", label:"other"},
+                {value:"summary", label:"summary"}],
+              true);
+            noteCombo.render();
+          });
         }
         // Add a submit event listener to the form and prevent it from posting back
         self.element.querySelectorAll('#add_notes').forEach((button) => {
@@ -80,18 +89,5 @@ export default class NotesList extends Component {
                 store.dispatch('removeNotes', { index });
             });
         });
-        
-        self.element.querySelectorAll("input[type=\"text\"]").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
-            });
-        });
-        
-        self.element.querySelectorAll("select").forEach((element) => {
-            element.addEventListener('change', () => {
-                store.dispatch('setItem', { path: element.id, value: element.value});
-            });
-        });
-
     }
 };

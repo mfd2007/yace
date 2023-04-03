@@ -12,11 +12,24 @@ The selectable products are placed in folder data.
 
 ## ToDo
 
-- Find full product name & id dynamically in product database.
+- Find full product name & id dynamically in product database, to make product definition more flexible.
 - Load files from URL or drag'n'drop.
 - Send csaf document to validation server
 - Hübsch machen
+    - Input-Felder ggf. Gruppieren
+    - Entfernen-Button ist teilweise verrutscht/nicht richtig sichtbar
 - Progessbar.
+    - ggf. Einfärben der einträge für die Menuzeile, je nachdem ob noch Angaben fehlen
+- Export-Button in Fusszeile
+- Übersichtstab erstellen
+    - Funktionen für laden von Dokumenten von Festplatte oder URL
+
+- Tab für Backend
+    - Option für Login in Backend
+    - Wird angezeigt, wenn Nutzer eingelogt ist.
+    - Anzeige von Dokumenten aus dem Backend
+    - Option für Anzeige von Dokumenten 
+    - Workflow-Wechsel
 
 
 ## Security consideration

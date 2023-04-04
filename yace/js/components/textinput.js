@@ -26,15 +26,15 @@ export default class TextInput extends Component {
           
           if(isNaN(pList[i+1])){
             if( !schema[elem] ) {
-              schema[elem] = {}
+              return "";
             }
             schema = schema[elem];
           }else{
             if( !schema[elem] ) {
-              schema[elem] = [{}]
+              return "";
             }
             if( ! schema[elem].at(pList[i+1]) ){
-              schema[elem].push({});
+              return "";
             }
             schema=schema[elem].at(pList[i+1]);
             i++;
@@ -54,7 +54,6 @@ export default class TextInput extends Component {
      */
     render() {
         let self = this;
-        
         // Loop the items and generate a list of elements
         self.element.innerHTML = `
               <label for="${self.id}">${self.label}</label>

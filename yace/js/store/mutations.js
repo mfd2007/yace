@@ -25,7 +25,6 @@ export default {
           }
       }
       schema[pList[len-1]] = payload.value;
-      console.log(state.csaf);
       return state;
   },
   addProduct(state, payload) {
@@ -35,12 +34,10 @@ export default {
     } else {
       state.csaf.product_tree.push(prod);
     }
-    console.log(state);
     return state;
   },
   removeProduct(state, payload) {
     state.csaf.product_tree.splice(payload.index, 1);
-    console.log(state);
     return state;
   },
   
@@ -65,7 +62,7 @@ export default {
     return state;
   },
   removeRevision(state, payload) {
-    state.csaf.document.tracking.revision_history.splice(payload.index, 1);
+    state.csaf.document.tracking.revision_history.splice(payload.index, 1); 
     return state;
   },
   
@@ -93,10 +90,7 @@ export default {
   removeNotes(state, payload) {
     state.csaf.document.notes.splice(payload.index, 1);
     return state;
-  }
-  
-  ,
-  
+  },
   addVulNotes(state, payload) {
     if (state.csaf.vulnerabilities[payload.vulId].notes == null){
       state.csaf.vulnerabilities[payload.vulId].notes =  [{}];

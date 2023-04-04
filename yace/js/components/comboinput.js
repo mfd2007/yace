@@ -26,15 +26,15 @@ export default class ComboInput extends Component {
           
           if(isNaN(pList[i+1])){
             if( !schema[elem] ) {
-              schema[elem] = {}
+              return "";
             }
             schema = schema[elem];
           }else{
             if( !schema[elem] ) {
-              schema[elem] = [{}]
+              return "";
             }
             if( ! schema[elem].at(pList[i+1]) ){
-              schema[elem].push({});
+              return "";
             }
             schema=schema[elem].at(pList[i+1]);
             i++;

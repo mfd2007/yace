@@ -64,7 +64,8 @@ export default class RevisionList extends Component {
         }
         // Add a submit event listener to the form and prevent it from posting back
         self.element.querySelectorAll('#add_revision').forEach((button) => {
-          button.addEventListener('click', () => {
+          button.addEventListener('click', (event) => {
+            event.preventDefault();
             store.dispatch('addRevision', null);
           });
         });
@@ -72,8 +73,9 @@ export default class RevisionList extends Component {
         // Find all the buttons in the list and when they are clicked, we dispatch a 
         // `clearItem` action which we pass the current item's index to
         self.element.querySelectorAll('#remove_revision').forEach((button, index) => {
-            button.addEventListener('click', () => {
-                store.dispatch('removeRevision', { index });
+            button.addEventListener('click', (event) => {
+              event.preventDefault()
+              store.dispatch('removeRevision', { index });
             });
         });
     }

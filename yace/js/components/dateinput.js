@@ -20,43 +20,44 @@ export default class DateInput extends Component {
       let schema = store.state.csaf;  // a moving reference to internal objects within obj
       let pList = self.field.split('.');
       let len = pList.length;
+      let date = "";
+      
       for(var i = 0; i < len-1; i++) {
           var elem = pList[i];
           
           if(isNaN(pList[i+1])){
             if( !schema[elem] ) {
-              schema[elem] = {}
+               return "";
             }
             schema = schema[elem];
           }else{
             if( !schema[elem] ) {
-              schema[elem] = [{}]
+               return "";
             }
             if( ! schema[elem].at(pList[i+1]) ){
-              schema[elem].push({});
+               return "";
             }
             schema=schema[elem].at(pList[i+1]);
             i++;
           }
       }
       
-      let date = "";
+      
       if (schema[pList[len-1]] != null){
         date = new Date(schema[pList[len-1]]);
+        var ten = function (i) {
+        	return (i < 10 ? '0' : '') + i;
+      	},
+      	YYYY = date.getFullYear(),
+        MM = ten(date.getMonth() + 1),
+        DD = ten(date.getDate()),
+        HH = ten(date.getHours()),
+        II = ten(date.getMinutes()),
+        SS = ten(date.getSeconds());
+        return YYYY + '-' + MM + '-' + DD + 'T' + HH + ':' + II + ':' + SS;
       } else {
-        date = new Date();
+        return "";
       }
-
-      var ten = function (i) {
-        return (i < 10 ? '0' : '') + i;
-      },
-      YYYY = date.getFullYear(),
-      MM = ten(date.getMonth() + 1),
-      DD = ten(date.getDate()),
-      HH = ten(date.getHours()),
-      II = ten(date.getMinutes()),
-      SS = ten(date.getSeconds());
-      return YYYY + '-' + MM + '-' + DD + 'T' + HH + ':' + II + ':' + SS;  
     }
 
     /**

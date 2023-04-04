@@ -10,8 +10,8 @@ import ReferenceList from './components/referencesList.js';
 import NotesList from './components/notesList.js';
 
 // Instantiate components
-const fieldTitle = new TextInput("#title", "title", "document.title");
-const fieldTrackingId = new TextInput("#tracking-id", "tracking", "document.tracking.id");
+const fieldTitle = new TextInput("#title", "title", "document.title", true, "");
+const fieldTrackingId = new TextInput("#tracking-id", "tracking", "document.tracking.id", true, "");
 
 const comboTlp = new ComboInput(
   "#tlp", 
@@ -21,7 +21,8 @@ const comboTlp = new ComboInput(
     {value:"WHITE", label:"WHITE"},
     {value:"GREEN", label:"GREEN"},
     {value:"AMBER", label:"AMBER"},
-    {value:"RED", label:"RED"}]);
+    {value:"RED", label:"RED"}],
+  true);
     
 const comboDocumentStatus = new ComboInput(
   "#document_status", 
@@ -30,7 +31,8 @@ const comboDocumentStatus = new ComboInput(
   [
     {value:"draft", label:"draft"},
     {value:"interim", label:"interim"},
-    {value:"final", label:"final"}]);
+    {value:"final", label:"final"}],
+  true);
 
 
 const revisionList = new RevisionList("#revisionList");

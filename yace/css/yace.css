@@ -1,0 +1,6 @@
+input:required:invalid {
+	border-color:#f44336!important
+}
+select:required:invalid {
+  border-color:#f44336!important
+}

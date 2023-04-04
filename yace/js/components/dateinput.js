@@ -1,18 +1,17 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
 
-export default class ComboInput extends Component {
+export default class DateInput extends Component {
     
     // Pass our store instance and the HTML element up to the parent Component
-    constructor(selector, lbl, fld, opts, required) {
+    constructor(selector, lbl, fld, required, pattern) {
         super({
             store,
             element: document.querySelector(selector)
         });
       this.label = lbl;
       this.field = fld;
-      this.options = opts;
-      this.id=fld;
+      this.id=fld
       this.required = required;
     }
 
@@ -40,11 +39,24 @@ export default class ComboInput extends Component {
             i++;
           }
       }
+      
+      let date = "";
       if (schema[pList[len-1]] != null){
-        return schema[pList[len-1]];
+        date = new Date(schema[pList[len-1]]);
       } else {
-        return "";
+        date = new Date();
       }
+
+      var ten = function (i) {
+        return (i < 10 ? '0' : '') + i;
+      },
+      YYYY = date.getFullYear(),
+      MM = ten(date.getMonth() + 1),
+      DD = ten(date.getDate()),
+      HH = ten(date.getHours()),
+      II = ten(date.getMinutes()),
+      SS = ten(date.getSeconds());
+      return YYYY + '-' + MM + '-' + DD + 'T' + HH + ':' + II + ':' + SS;  
     }
 
     /**
@@ -54,27 +66,22 @@ export default class ComboInput extends Component {
      */
     render() {
         let self = this;
-        let selected = self.getValue();
+        
         // Loop the items and generate a list of elements
         self.element.innerHTML = `
-            <label for="${self.id}">${self.label}</label>
-            <select class="w3-input w3-border"
-                    id="${self.id}" 
-                    value="${self.getValue()}"
-                    data-csafpath="${this.field}"
-                    ${this.required?'required':''} >
-              <option value="">Open this select menu</option>
-              ${self.options.map(item => {
-                    return `
-                        <option value="${item.value}" ${(item.value == selected)?'selected':''}>${item.label}</option>
-                    `
-                }).join('')}
-            </select>
+              <label for="${self.id}">${self.label}</label>
+              <input class="w3-input w3-border" 
+              id="${self.id}" 
+              autocomplete="off" 
+              type="datetime-local" 
+              value="${self.getValue()}" 
+              data-csafpath="${this.field}" 
+              ${this.required?'required':''} />
         `;
         
-        document.querySelectorAll("[id=\""+self.field +"\"]").forEach((button, index) => {
+        document.querySelectorAll("[id=\""+self.id +"\"]").forEach((button, index) => {
             button.onchange = function(){
-                store.dispatch('setItem', { path: button.dataset.csafpath, value: button.value});
+              store.dispatch('setItem', { path: button.dataset.csafpath, value: button.value});
             };
         });
     }

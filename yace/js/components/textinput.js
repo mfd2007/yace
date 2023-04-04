@@ -4,7 +4,7 @@ import store from '../store/index.js';
 export default class TextInput extends Component {
     
     // Pass our store instance and the HTML element up to the parent Component
-    constructor(selector, lbl, fld) {
+    constructor(selector, lbl, fld, required, pattern) {
         super({
             store,
             element: document.querySelector(selector)
@@ -12,6 +12,8 @@ export default class TextInput extends Component {
       this.label = lbl;
       this.field = fld;
       this.id=fld
+      this.required = required;
+      this.pattern = pattern;
     }
 
     getValue() {
@@ -56,13 +58,20 @@ export default class TextInput extends Component {
         // Loop the items and generate a list of elements
         self.element.innerHTML = `
               <label for="${self.id}">${self.label}</label>
-              <input type="text" class="w3-input" id="${self.id}" autocomplete="off" value="${self.getValue()}"/>
+              <input type="text" 
+                     class="w3-input w3-border" 
+                     id="${self.id}" 
+                     autocomplete="off" 
+                     value="${self.getValue()}" 
+                     data-csafpath="${this.field}" 
+                     ${this.required?'required':''}  
+                     ${this.pattern ? 'pattern=\"' + this.pattern + '\"':''} />
         `;
         
         document.querySelectorAll("[id=\""+self.id +"\"]").forEach((button, index) => {
-            button.addEventListener('change', () => {
-                store.dispatch('setItem', { path: this.field, value: button.value});
-            });
+            button.onchange = function(){
+              store.dispatch('setItem', { path: button.dataset.csafpath, value: button.value});
+            };
         });
     }
 };

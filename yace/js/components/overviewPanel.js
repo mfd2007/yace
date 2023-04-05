@@ -25,6 +25,11 @@ export default class ComboInput extends Component {
           <p>&nbsp;</p>
           <p>&nbsp;</p>
         </div>
+        
+        <div>
+          <input type="text" class="w3-input" id="url" />
+          <button class="w3-button" id="load">load CSAF File</button>
+        </div>
         <div id="output">
         </div>
       `;
@@ -50,6 +55,35 @@ export default class ComboInput extends Component {
           });
           reader.readAsText(fileList[0]);
         }
+      });
+    });
+    
+    document.querySelectorAll("[id=\"load\"]").forEach((element, index) => {
+      element.addEventListener('click', (event) => {
+        var url = document.getElementById('url').value;
+  
+        var getJSON = function(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.responseType = 'json';
+          xhr.onload = function() {
+              var status = xhr.status;
+              if (status == 200) {
+                  callback(null, xhr.response);
+              } else {
+                  callback(status);
+              }
+          };
+          xhr.send();
+        };
+
+        getJSON(url,  function(err, data) {
+          if (err != null) {
+              console.error(err);
+          } else {
+            store.dispatch('loadDocument',data);
+          }
+        });
       });
     });
   }

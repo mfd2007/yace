@@ -1,20 +1,4 @@
 
-  function getProductList(){
-    return [
-    {
-      "id": 1,
-      "label": "Controller v1.0"
-    },
-    {
-      "id": 2,
-      "label": "Controller v2.0"
-    },
-    {
-      "id": 3,
-      "label": "Controller v3.0"
-    }
-  ];
-  }
   const API_URL_LIST = './data/product-list.json';
   const API_URL_PRODUCT = './data/products/';
   

@@ -9,6 +9,8 @@ import RevisionList from './components/revisionList.js';
 import ReferenceList from './components/referencesList.js';
 import NotesList from './components/notesList.js';
 
+import OverviewPanel from './components/overviewPanel.js';
+
 // Instantiate components
 const fieldTitle = new TextInput("#title", "title", "document.title", true, "");
 const fieldTrackingId = new TextInput("#tracking-id", "tracking", "document.tracking.id", true, "");
@@ -40,6 +42,8 @@ const referenceList = new ReferenceList("#referencesList");
 const notesList = new NotesList("#notesList");
 const productList = new ProductList("#productList");
 const vulnerabilityList = new VulnerabilityList("#vulnerablityList");
+
+const overviewPanel = new OverviewPanel("#loadPanel");
 // Initial renders
 fieldTitle.render();
 fieldTrackingId.render();
@@ -50,6 +54,8 @@ referenceList.render();
 notesList.render();
 productList.render();
 vulnerabilityList.render();
+
+overviewPanel.render();
 
 document.querySelectorAll("#btn_export").forEach((element) => {
             element.addEventListener('click', () => {

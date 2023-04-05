@@ -30,9 +30,9 @@ export default {
   addProduct(state, payload) {
     let prod = payload;
     if (state.csaf.product_tree == null){
-      state.csaf.product_tree =  [prod];
+      state.csaf.product_tree.branches =  [prod.branches];
     } else {
-      state.csaf.product_tree.push(prod);
+      state.csaf.product_tree.branches.push(prod.branches);
     }
     return state;
   },
@@ -116,5 +116,10 @@ export default {
       vulStatus[status].filter((productId => productId !== payload.productId));
     });
     vulStatus[payload.status].push(payload.productId);
+    return state;
+  },
+  loadDocument(state, payload){
+    state.csaf = payload;
+    return state;
   }
 };

@@ -1,20 +1,6 @@
+import * as JsonPath from '../lib/JsonPath.js';
 
-  function getProductList(){
-    return [
-    {
-      "id": 1,
-      "label": "Controller v1.0"
-    },
-    {
-      "id": 2,
-      "label": "Controller v2.0"
-    },
-    {
-      "id": 3,
-      "label": "Controller v3.0"
-    }
-  ];
-  }
+
   const API_URL_LIST = './data/product-list.json';
   const API_URL_PRODUCT = './data/products/';
   
@@ -39,6 +25,17 @@
     }
   }
 
+  function getProductFullNames(product_tree){
+    let ret = JsonPath.jsonPath(product_tree, "product_tree.[:].product");
+    if(ret){
+      return ret;
+    }else{
+      ret = JsonPath.jsonPath(product_tree, "product_tree.full_product_names")[0];
+      return ret;
+    }
+    //return [];
+  }
+
   function getProductFullName(item){
       return item.branches[0].branches[0].product.name;
   }
@@ -47,4 +44,6 @@
       return item.branches[0].branches[0].product.product_id;
   }
 
-  export {getProductList,getProductDetail, getProductFullName, getProductFullId, fetchProductList}
+  export {getProductDetail, getProductFullNames, getProductFullId, fetchProductList}
+  
+  

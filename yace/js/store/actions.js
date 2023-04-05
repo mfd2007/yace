@@ -48,5 +48,8 @@ export default {
     },
     setProductStatus(context, payload) {
       context.commit('setProductStatus', payload);
+    },
+    loadDocument(context, payload){
+      context.commit('loadDocument', payload);
     }
 };

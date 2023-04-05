@@ -1,7 +1,8 @@
 import Component from '../lib/component.js';
 import ProductSelector from './productSelector.js';
 import store from '../store/index.js';
-import * as proddb from '../lib/productdatabase.js';
+import * as ProductDatabase from '../lib/productdatabase.js';
+
 
 export default class List extends Component {
     
@@ -36,10 +37,10 @@ export default class List extends Component {
         self.element.innerHTML = `
             <h2>Products</h2>
             <ul class="w3-ul">
-                ${store.state.csaf.product_tree.map(item => {
+                ${ProductDatabase.getProductFullNames(store.state.csaf).map(item => { //${store.state.csaf.product_tree.map(item => {
                     return `
                         <li class="w3-display-container">
-                          ${proddb.getProductFullName(item)}
+                          ${item.name}
                           <button id="remove_product" class="w3-button w3-transparent w3-display-right" aria-label="Delete this item">&times</button>
                         </li>
                     `

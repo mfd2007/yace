@@ -1,5 +1,6 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
+import TextArea from './textarea.js';
 import TextInput from './textinput.js';
 import ComboInput from './comboinput.js';
 
@@ -52,7 +53,7 @@ export default class NotesList extends Component {
           store.state.csaf?.document?.notes.forEach((notesItem, index) => {
             let noteTitle = new TextInput("#input_document\\.notes\\." + index + "\\.title", "Title", "document.notes." + index + ".title", true, "");
             noteTitle.render();
-            let noteText = new TextInput("#input_document\\.notes\\." + index + "\\.text", "Text", "document.notes." + index + ".text", true, "");
+            let noteText = new TextArea("#input_document\\.notes\\." + index + "\\.text", "Text", "document.notes." + index + ".text", true, "");
             noteText.render();
             let noteCombo = new ComboInput(
               "#input_document\\.notes\\." + index + "\\.category", 

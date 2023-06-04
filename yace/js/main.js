@@ -13,8 +13,8 @@ import OverviewPanel from './components/overviewPanel.js';
 import createFilename from './lib/createFilename.js';
 
 // Instantiate components
-const fieldTitle = new TextInput("#title", "title", "document.title", true, "");
-const fieldTrackingId = new TextInput("#tracking-id", "tracking", "document.tracking.id", true, "");
+const fieldTitle = new TextInput("#title", "Title", "document.title", true, "");
+const fieldTrackingId = new TextInput("#tracking-id", "Advisory ID", "document.tracking.id", true, "");
 
 const comboTlp = new ComboInput(
   "#tlp", 

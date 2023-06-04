@@ -24,13 +24,13 @@ export default class ReferencesList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.references == undefined) {
           self.element.innerHTML = `
-            <h2>References</h2>
+            <h3>References</h3>
             <button id="add_reference" class="w3-button w3-block w3-green">Add reference</button>
          `;
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <h2>Revision</h2>
+            <h3>Revision</h3>
             ${store.state.csaf?.document?.references.map((item, index) => {
               return `
                 <div class="w3-panel w3-leftbar">

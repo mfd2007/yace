@@ -10,6 +10,7 @@ import ReferenceList from './components/referencesList.js';
 import NotesList from './components/notesList.js';
 
 import OverviewPanel from './components/overviewPanel.js';
+import createFilename from './lib/createFilename.js';
 
 // Instantiate components
 const fieldTitle = new TextInput("#title", "title", "document.title", true, "");
@@ -87,7 +88,7 @@ document.querySelectorAll("#btn_export").forEach((element) => {
               a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {
                 type: "application/json"
               }));
-              a.setAttribute("download", "data.json");
+              a.setAttribute("download", createFilename(obj, true, "json"));
               document.body.appendChild(a);
               a.click();
               document.body.removeChild(a);

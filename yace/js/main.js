@@ -41,7 +41,7 @@ const revisionList = new RevisionList("#revisionList");
 const referenceList = new ReferenceList("#referencesList");
 const notesList = new NotesList("#notesList");
 const productList = new ProductList("#productList");
-const vulnerabilityList = new VulnerabilityList("#vulnerablityList");
+const vulnerabilityList = new VulnerabilityList("#vulnerabilityList");
 
 const overviewPanel = new OverviewPanel("#loadPanel");
 // Initial renders

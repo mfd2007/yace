@@ -29,7 +29,7 @@ export default {
   },
   addProduct(state, payload) {
     let prod = payload;
-    if (!('product_tree' in state.csaf)) {console.log('Add missing product_tree'); state.csaf.product_tree = {}}
+    if (!('product_tree' in state.csaf)) {state.csaf.product_tree = {}}
     if (!('branches' in state.csaf.product_tree)){
       state.csaf.product_tree.branches = [prod.branches];
     } else {
@@ -38,7 +38,7 @@ export default {
     return state;
   },
   removeProduct(state, payload) {
-    state.csaf.product_tree.splice(payload.index, 1);
+    state.csaf.product_tree.branches.splice(payload.index, 1);
     return state;
   },
   

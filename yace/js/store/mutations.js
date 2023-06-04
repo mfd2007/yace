@@ -114,9 +114,13 @@ export default {
       vulStatus[payload.status] = [];
     }
     Object.keys(vulStatus).forEach((status) =>{
-      vulStatus[status].filter((productId => productId !== payload.productId));
+      vulStatus[status] = vulStatus[status].filter((productId => productId !== payload.productId));
     });
     vulStatus[payload.status].push(payload.productId);
+    //remove empty product_status
+    Object.keys(vulStatus).forEach((status) =>{
+      if (vulStatus[status].length == 0) {delete vulStatus[status]}
+    });
     return state;
   },
   loadDocument(state, payload){

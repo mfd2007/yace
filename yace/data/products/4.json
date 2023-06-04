@@ -10,9 +10,9 @@
 					"branches": [
 						{
 							"category": "product_version",
-							"name": "4.3",
+							"name": "4.2",
 							"product": {
-								"name": "Product C 4.3",
+								"name": "Product C 4.2",
 								"product_id": "4"
 							}
 						}

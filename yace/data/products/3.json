@@ -6,13 +6,13 @@
 			"branches": [
 				{
 					"category": "product_name",
-					"name": "Product C",
+					"name": "Product B",
 					"branches": [
 						{
 							"category": "product_version",
-							"name": "4.2",
+							"name": "1.0",
 							"product": {
-								"name": "Product C 4.2",
+								"name": "Product B 1.0",
 								"product_id": "3"
 							}
 						}

@@ -66,22 +66,18 @@ document.querySelectorAll("#btn_export").forEach((element) => {
             
             let obj = JSON.parse(JSON.stringify(store.state.csaf));
             let target={product_tree:{}};
-            obj.product_tree.forEach((item) => {
-              if(item.branches != undefined){
+            obj.product_tree.branches.forEach((item) => {
+              if(item != undefined){
                 if(target.product_tree.branches === undefined){
-                  target.product_tree.branches = item.branches;
+                  target.product_tree.branches = [item];
                 }else{
-                  item.branches.forEach((b) => {
-                    target.product_tree.branches = [...target.product_tree.branches, b];
-                  });
+                  target.product_tree.branches = [...target.product_tree.branches, item]
                 }
               }else if(item.relationships != undefined){
                 if(target.product_tree.relationships === undefined){
-                  target.product_tree.relationships = [item.relationships];
+                  target.product_tree.relationships = [item];
                 }else{
-                  item.relationships.forEach((r) => {
-                    target.product_tree.relationships = [...target.product_tree.relationships, r];
-                  });
+                  target.product_tree.relationships = [...target.product_tree.relationships, item];
                 }
               }
             });

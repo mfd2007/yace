@@ -31,9 +31,9 @@ export default {
     let prod = payload;
     if (!('product_tree' in state.csaf)) {state.csaf.product_tree = {}}
     if (!('branches' in state.csaf.product_tree)){
-      state.csaf.product_tree.branches = [prod.branches];
+      state.csaf.product_tree.branches = [prod.branches[0]];
     } else {
-      state.csaf.product_tree.branches.push(prod.branches);
+      state.csaf.product_tree.branches.push(prod.branches[0]);
     }
     return state;
   },

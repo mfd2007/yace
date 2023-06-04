@@ -21,10 +21,10 @@ const comboTlp = new ComboInput(
   "TLP-Label", 
   "document.distribution.tlp.label", 
   [
-    {value:"WHITE", label:"CLEAR"},
-    {value:"GREEN", label:"GREEN"},
-    {value:"AMBER", label:"AMBER"},
-    {value:"RED", label:"RED"}],
+    {value:"WHITE", label:"TLP:CLEAR"},
+    {value:"GREEN", label:"TLP:GREEN"},
+    {value:"AMBER", label:"TLP:AMBER"},
+    {value:"RED", label:"TLP:RED"}],
   true);
     
 const comboDocumentStatus = new ComboInput(

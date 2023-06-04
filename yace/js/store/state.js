@@ -13,15 +13,38 @@ export default {
         tracking:{
           "revision_history": [
             {
-              "number": "1.0.0",
-              "date": "2023-03-15T00:00:00Z",
+              "number": "1",
+              "date": "2023-06-05T00:00:00Z",
               "summary": "Initial version"
             }
           ]
         }
       },
       product_tree:[
-        {}
+        {
+          "branches": [
+            {
+              "category": "vendor",
+              "name": "Example Company",
+              "branches": [
+                {
+                  "category": "product_name",
+                  "name": "Product A",
+                  "branches": [
+                    {
+                      "category": "product_version",
+                      "name": "1.0",
+                      "product": {
+                        "name": "Product A 1.0",
+                        "product_id": "1"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
 };

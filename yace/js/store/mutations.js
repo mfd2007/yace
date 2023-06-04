@@ -29,8 +29,9 @@ export default {
   },
   addProduct(state, payload) {
     let prod = payload;
-    if (state.csaf.product_tree == null){
-      state.csaf.product_tree.branches =  [prod.branches];
+    if (!('product_tree' in state.csaf)) {console.log('Add missing product_tree'); state.csaf.product_tree = {}}
+    if (!('branches' in state.csaf.product_tree)){
+      state.csaf.product_tree.branches = [prod.branches];
     } else {
       state.csaf.product_tree.branches.push(prod.branches);
     }

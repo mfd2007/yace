@@ -20,7 +20,7 @@ const comboTlp = new ComboInput(
   "TLP-Label", 
   "document.distribution.tlp.label", 
   [
-    {value:"WHITE", label:"WHITE"},
+    {value:"WHITE", label:"CLEAR"},
     {value:"GREEN", label:"GREEN"},
     {value:"AMBER", label:"AMBER"},
     {value:"RED", label:"RED"}],
@@ -89,9 +89,9 @@ document.querySelectorAll("#btn_export").forEach((element) => {
 
               const a = document.createElement("a");
               a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {
-                type: "text/plain"
+                type: "application/json"
               }));
-              a.setAttribute("download", "data.txt");
+              a.setAttribute("download", "data.json");
               document.body.appendChild(a);
               a.click();
               document.body.removeChild(a);

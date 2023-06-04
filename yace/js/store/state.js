@@ -5,10 +5,10 @@ export default {
         csaf_version:"2.0",
         category: "csaf_security_advisory",
         "publisher": {
-          "category": "coordinator",
-          "name": "ACME Cooperation",
-          "namespace": "https://acme.example",
-          "contact_details": "csaf@acme.example"
+          "category": "vendor",
+          "name": "Example Company",
+          "namespace": "https://www.example.com",
+          "contact_details": "psirt@example.com"
         },
         tracking:{
           "revision_history": [
@@ -21,7 +21,7 @@ export default {
         }
       },
       product_tree:[
-        {branches:[{category:"product_family", name:"controller", branches: [{category:"product_version", name:"1.0", product:{name:"controller 1.0",product_id:"1"}}]}]}
+        {}
       ]
     }
 };

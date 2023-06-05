@@ -19,6 +19,9 @@ export default {
     updateVulnerability(context, payload) {
       context.commit('updateVulnerability', payload);
     },
+    setCWE(context, payload) {
+      context.commit('setCWE', payload);
+    },
     
     addRevision(context, payload) {
       context.commit('addRevision', payload);

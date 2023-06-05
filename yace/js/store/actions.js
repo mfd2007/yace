@@ -46,6 +46,15 @@ export default {
     removeVulNotes(context, payload) {
       context.commit('removeVulNotes', payload);
     },
+    addVulRemediations(context, payload) {
+      context.commit('addVulRemediations', payload);
+    },
+    removeVulRemediations(context, payload) {
+      context.commit('removeVulRemediations', payload);
+    },
+    setRemediationProduct(context, payload) {
+      context.commit('setRemediationProduct', payload);
+    },
     setProductStatus(context, payload) {
       context.commit('setProductStatus', payload);
     },

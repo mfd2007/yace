@@ -104,6 +104,28 @@ export default {
     state.csaf.vulnerabilities[payload.vulId].notes.splice(payload.index, 1);
     return state;
   },
+  addVulRemediations(state, payload) {
+    if (state.csaf.vulnerabilities[payload.vulId].remediations == null){
+      state.csaf.vulnerabilities[payload.vulId].remediations =  [{}];
+    } else {
+      state.csaf.vulnerabilities[payload.vulId].remediations.push({});
+    }
+    return state;
+  },
+  removeVulRemediations(state, payload) {
+    state.csaf.vulnerabilities[payload.vulId].remediations.splice(payload.index, 1);
+    return state;
+  },
+  setRemediationProduct(state, payload){
+    let remProducts=state.csaf.vulnerabilities[payload.vulnerabilityId].remediations[payload.remediationId].product_ids;
+    if(remProducts === undefined){
+      state.csaf.vulnerabilities[payload.vulnerabilityId].remediations[payload.remediationId].product_ids= [];
+      remProducts=state.csaf.vulnerabilities[payload.vulnerabilityId].remediations[payload.remediationId].product_ids;
+    }
+    remProducts=[].concat(payload.productIds);
+    state.csaf.vulnerabilities[payload.vulnerabilityId].remediations[payload.remediationId].product_ids=remProducts;
+    return state;
+  },
   setProductStatus(state, payload){
     let vulStatus=state.csaf.vulnerabilities[payload.vulnerabilityId].product_status;
     if(vulStatus === undefined){

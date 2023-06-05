@@ -1,4 +1,5 @@
 import * as proddb from '../lib/productdatabase.js';
+import * as cvss from '../vendor/first/cvsscalc31.js';
 
 export default {
     setItem(state, payload) {
@@ -124,6 +125,58 @@ export default {
     }
     remProducts=[].concat(payload.productIds);
     state.csaf.vulnerabilities[payload.vulnerabilityId].remediations[payload.remediationId].product_ids=remProducts;
+    return state;
+  },
+  addVulScores(state, payload) {
+    if (state.csaf.vulnerabilities[payload.vulId].scores == null){
+      state.csaf.vulnerabilities[payload.vulId].scores =  [{}];
+    } else {
+      state.csaf.vulnerabilities[payload.vulId].scores.push({});
+    }
+    return state;
+  },
+  removeVulScores(state, payload) {
+    state.csaf.vulnerabilities[payload.vulId].scores.splice(payload.index, 1);
+    return state;
+  },
+  setScoreValues(state, payload){
+    var schema = state.csaf;  // a moving reference to internal objects within obj
+      var pList = payload.path.split('.');
+      var len = pList.length;
+      for(var i = 0; i < len-1; i++) {
+          var elem = pList[i];
+          
+          if(isNaN(pList[i+1])){
+            if( !schema[elem] ) {
+              schema[elem] = {}
+            }
+            schema = schema[elem];
+          }else{
+            if( !schema[elem] ) {
+              schema[elem] = [{}]
+            }
+            if( ! schema[elem].at(pList[i+1]) ){
+              schema[elem].push({});
+            }
+            schema=schema[elem].at(pList[i+1]);
+            i++;
+          }
+      }
+      schema[pList[len-1]] = payload.value;
+      schema.version = "3.1";
+      const result = CVSS31.calculateCVSSFromVector(payload.value);
+      schema.baseScore = result.baseMetricScore;
+      schema.baseSeverity = result.baseSeverity;
+    return state;
+  },
+  setScoreProduct(state, payload){
+    let scoreProducts=state.csaf.vulnerabilities[payload.vulnerabilityId].scores[payload.scoreId].product_ids;
+    if(scoreProducts === undefined){
+      state.csaf.vulnerabilities[payload.vulnerabilityId].scores[payload.scoreId].product_ids= [];
+      scoreProducts=state.csaf.vulnerabilities[payload.vulnerabilityId].scores[payload.scoreId].product_ids;
+    }
+    scoreProducts=[].concat(payload.productIds);
+    state.csaf.vulnerabilities[payload.vulnerabilityId].scores[payload.scoreId].product_ids=scoreProducts;
     return state;
   },
   setProductStatus(state, payload){

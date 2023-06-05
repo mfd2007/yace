@@ -55,6 +55,18 @@ export default {
     setRemediationProduct(context, payload) {
       context.commit('setRemediationProduct', payload);
     },
+    addVulScores(context, payload) {
+      context.commit('addVulScores', payload);
+    },
+    removeVulScores(context, payload) {
+      context.commit('removeVulScores', payload);
+    },
+    setScoreValues(context, payload) {
+      context.commit('setScoreValues', payload);
+    },
+    setScoreProduct(context, payload) {
+      context.commit('setScoreProduct', payload);
+    },
     setProductStatus(context, payload) {
       context.commit('setProductStatus', payload);
     },

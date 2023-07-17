@@ -1,16 +1,22 @@
 {
 	"branches": [
 		{
-			"category": "product_family",
-			"name": "controller",
+			"category": "vendor",
+			"name": "Example Company",
 			"branches": [
 				{
-					"category": "product_version",
-					"name": "3.0",
-					"product": {
-						"name": "controller 3.0",
-						"product_id": "3"
-					}
+					"category": "product_name",
+					"name": "Product B",
+					"branches": [
+						{
+							"category": "product_version",
+							"name": "1.0",
+							"product": {
+								"name": "Product B 1.0",
+								"product_id": "3"
+							}
+						}
+					]
 				}
 			]
 		}

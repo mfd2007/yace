@@ -1,5 +1,6 @@
 import Component from '../lib/component.js';
 import store from '../store/index.js';
+import TextArea from './textarea.js';
 import TextInput from './textinput.js';
 import ComboInput from './comboinput.js';
 
@@ -24,13 +25,13 @@ export default class NotesList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.notes == undefined) {
           self.element.innerHTML = `
-            <h2>Notes</h2>
+            <h3>Notes</h3>
             <button id="add_notes" class="w3-button w3-block w3-green">Add notes</button>
          `;
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <h2>Notes</h2>
+            <h3>Notes</h3>
             ${store.state.csaf?.document?.notes.map((notesItem, index) => {
               return `
                 <div class="w3-panel w3-leftbar">
@@ -52,7 +53,7 @@ export default class NotesList extends Component {
           store.state.csaf?.document?.notes.forEach((notesItem, index) => {
             let noteTitle = new TextInput("#input_document\\.notes\\." + index + "\\.title", "Title", "document.notes." + index + ".title", true, "");
             noteTitle.render();
-            let noteText = new TextInput("#input_document\\.notes\\." + index + "\\.text", "Text", "document.notes." + index + ".text", true, "");
+            let noteText = new TextArea("#input_document\\.notes\\." + index + "\\.text", "Text", "document.notes." + index + ".text", true, "");
             noteText.render();
             let noteCombo = new ComboInput(
               "#input_document\\.notes\\." + index + "\\.category", 

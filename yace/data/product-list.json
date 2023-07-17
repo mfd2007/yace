@@ -2,23 +2,23 @@
 	"products": [
 		{
 			"id": 1,
-			"label": "Controller v1.0"
+			"label": "Product A 1.0"
 		},
 		{
 			"id": 2,
-			"label": "Controller v2.0"
+			"label": "Product A 1.1"
 		},
 		{
 			"id": 3,
-			"label": "Controller v3.0"
+			"label": "Product B 1.0"
 		},
-    {
-      "id": 4,
-      "label": "Controller v4.0"
-    },
-    {
-      "id": "994_44",
-      "label": "Sensor 994 v4.4"
-    } 
+		{
+			"id": 4,
+			"label": "Product C 4.2"
+		},
+		{
+			"id": 5,
+			"label": "Product C 4.3"
+		}
 	]
 }

@@ -10,20 +10,21 @@ import ReferenceList from './components/referencesList.js';
 import NotesList from './components/notesList.js';
 
 import OverviewPanel from './components/overviewPanel.js';
+import createFilename from './lib/createFilename.js';
 
 // Instantiate components
-const fieldTitle = new TextInput("#title", "title", "document.title", true, "");
-const fieldTrackingId = new TextInput("#tracking-id", "tracking", "document.tracking.id", true, "");
+const fieldTitle = new TextInput("#title", "Title", "document.title", true, "");
+const fieldTrackingId = new TextInput("#tracking-id", "Advisory ID", "document.tracking.id", true, "");
 
 const comboTlp = new ComboInput(
   "#tlp", 
   "TLP-Label", 
   "document.distribution.tlp.label", 
   [
-    {value:"WHITE", label:"WHITE"},
-    {value:"GREEN", label:"GREEN"},
-    {value:"AMBER", label:"AMBER"},
-    {value:"RED", label:"RED"}],
+    {value:"WHITE", label:"TLP:CLEAR"},
+    {value:"GREEN", label:"TLP:GREEN"},
+    {value:"AMBER", label:"TLP:AMBER"},
+    {value:"RED", label:"TLP:RED"}],
   true);
     
 const comboDocumentStatus = new ComboInput(
@@ -41,7 +42,7 @@ const revisionList = new RevisionList("#revisionList");
 const referenceList = new ReferenceList("#referencesList");
 const notesList = new NotesList("#notesList");
 const productList = new ProductList("#productList");
-const vulnerabilityList = new VulnerabilityList("#vulnerablityList");
+const vulnerabilityList = new VulnerabilityList("#vulnerabilityList");
 
 const overviewPanel = new OverviewPanel("#loadPanel");
 // Initial renders
@@ -66,22 +67,18 @@ document.querySelectorAll("#btn_export").forEach((element) => {
             
             let obj = JSON.parse(JSON.stringify(store.state.csaf));
             let target={product_tree:{}};
-            obj.product_tree.forEach((item) => {
-              if(item.branches != undefined){
+            obj.product_tree.branches.forEach((item) => {
+              if(item != undefined){
                 if(target.product_tree.branches === undefined){
-                  target.product_tree.branches = item.branches;
+                  target.product_tree.branches = [item];
                 }else{
-                  item.branches.forEach((b) => {
-                    target.product_tree.branches = [...target.product_tree.branches, b];
-                  });
+                  target.product_tree.branches = [...target.product_tree.branches, item]
                 }
               }else if(item.relationships != undefined){
                 if(target.product_tree.relationships === undefined){
-                  target.product_tree.relationships = [item.relationships];
+                  target.product_tree.relationships = [item];
                 }else{
-                  item.relationships.forEach((r) => {
-                    target.product_tree.relationships = [...target.product_tree.relationships, r];
-                  });
+                  target.product_tree.relationships = [...target.product_tree.relationships, item];
                 }
               }
             });
@@ -89,9 +86,9 @@ document.querySelectorAll("#btn_export").forEach((element) => {
 
               const a = document.createElement("a");
               a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {
-                type: "text/plain"
+                type: "application/json"
               }));
-              a.setAttribute("download", "data.txt");
+              a.setAttribute("download", createFilename(obj, true, "json"));
               document.body.appendChild(a);
               a.click();
               document.body.removeChild(a);

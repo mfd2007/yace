@@ -24,7 +24,7 @@ export default class RevisionList extends Component {
         // If there are no items to show, render a little status instead
         if(store.state.csaf?.document?.tracking?.revision_history == undefined) {
           self.element.innerHTML = `
-            <h2>Revision</h2>
+            <h3>Revision</h3>
             <ul class="w3-ul">
               <li>
                 <button id="add_revision" class="w3-button w3-block w3-green">Add</button>
@@ -34,7 +34,7 @@ export default class RevisionList extends Component {
         } else {
         // Loop the items and generate a list of elements
           self.element.innerHTML = `
-            <h2>Revision</h2>
+            <h3>Revision</h3>
             ${store.state.csaf.document.tracking.revision_history.map((revisionItem, index) => {
               return `
                 <div class="w3-panel w3-leftbar">

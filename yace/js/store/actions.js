@@ -19,6 +19,9 @@ export default {
     updateVulnerability(context, payload) {
       context.commit('updateVulnerability', payload);
     },
+    setCWE(context, payload) {
+      context.commit('setCWE', payload);
+    },
     
     addRevision(context, payload) {
       context.commit('addRevision', payload);
@@ -45,6 +48,27 @@ export default {
     },
     removeVulNotes(context, payload) {
       context.commit('removeVulNotes', payload);
+    },
+    addVulRemediations(context, payload) {
+      context.commit('addVulRemediations', payload);
+    },
+    removeVulRemediations(context, payload) {
+      context.commit('removeVulRemediations', payload);
+    },
+    setRemediationProduct(context, payload) {
+      context.commit('setRemediationProduct', payload);
+    },
+    addVulScores(context, payload) {
+      context.commit('addVulScores', payload);
+    },
+    removeVulScores(context, payload) {
+      context.commit('removeVulScores', payload);
+    },
+    setScoreValues(context, payload) {
+      context.commit('setScoreValues', payload);
+    },
+    setScoreProduct(context, payload) {
+      context.commit('setScoreProduct', payload);
     },
     setProductStatus(context, payload) {
       context.commit('setProductStatus', payload);
